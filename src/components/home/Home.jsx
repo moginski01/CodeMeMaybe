@@ -1,10 +1,10 @@
 import React from 'react';
-import './header.css';
+import './home.css';
 import video from '../../assets/video.mp4'
 import main_photo from '../../assets/main_img.png'
 
 
-const Header = () => {
+const Home = () => {
     return (
         <div className="codememaybe__header section__padding">
             <div className="codememaybe__header_content">
@@ -22,4 +22,4 @@ const Header = () => {
     );
 }
 
-export default Header;
+export default Home;

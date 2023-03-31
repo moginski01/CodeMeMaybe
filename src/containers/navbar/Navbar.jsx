@@ -1,13 +1,14 @@
 import React, {useState} from 'react';
 import {RiMenu3Fill, RiCloseLine, RiMenu3Line} from "react-icons/ri";
-import logo from'../../assets/logo.png'
+import logo from '../../assets/logo.png'
 import './navbar.css';
+import {Link} from "react-router-dom";
 
 const Menu = () => (
     <>
-        <p><a href="#home">Home</a></p>
-        <p><a href="#aboutus">About us</a></p>
-        <p><a href="#contact">Contact</a></p>
+        <p><Link to="/">Home</Link></p>
+        <p><Link to="/aboutus">About us</Link></p>
+        <p><Link to="/contact">Contact</Link></p>
     </>
 )
 
@@ -25,8 +26,8 @@ const Navbar = () => {
                 </div>
             </div>
             <div className="codememaybe__navbar-sign">
-                <p>Sign in</p>
-                <button type="button">Sign up</button>
+                <p><Link to="/login">Login in</Link></p>
+                <button type="button"><Link to="/signup">Sign Up</Link></button>
             </div>
             <div className="codememaybe__navbar-menu">
                 {toggleMenu
