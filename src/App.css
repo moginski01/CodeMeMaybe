@@ -4,9 +4,8 @@
     margin: 0;
     scroll-behavior: smooth;
 }
-
 body {
-    background: var(--color-bg);
+    background-color: var(--color-bg);
 }
 
 a {
@@ -14,31 +13,6 @@ a {
     text-decoration: none;
 }
 
-.gradient__bg {
-
-    /* ff 3.6+ */
-    background:-moz-radial-gradient(circle at 3% 25%, rgba(25, 56, 147, 1) 1%, rgba(4, 9, 24, 1) 100%);
-
-    /* safari 5.1+,chrome 10+ */
-    background:-webkit-radial-gradient(circle at 3% 25%, rgba(25, 56, 147, 1) 1%, rgba(4, 9, 24, 1) 100%);
-
-    /* opera 11.10+ */
-    background:-o-radial-gradient(circle at 3% 25%, rgba(25, 56, 147, 1) 1%, rgba(4, 9, 24, 1) 100%);
-
-    /* ie 10+ */
-    background:-ms-radial-gradient(circle at 3% 25%, rgba(25, 56, 147, 1) 1%, rgba(4, 9, 24, 1) 100%);
-
-    /* global 92%+ browsers support */
-    background:radial-gradient(circle at 3% 25%, rgba(25, 56, 147, 1) 1%, rgba(4, 9, 24, 1) 100%);
-
-}
-
-.gradient__text{
-    background:var(--gradient-text);
-    background-clip: text;
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-}
 
 .section__padding {
     padding: 4rem 6rem;
@@ -46,33 +20,6 @@ a {
 
 .section__margin {
     margin: 4rem 6rem;
-}
-
-
-.scale-up-center {
-    -webkit-animation: scale-up-center 0.4s cubic-bezier(0.390, 0.575, 0.565, 1.000) both;
-    animation: scale-up-center 0.4s cubic-bezier(0.390, 0.575, 0.565, 1.000) both;
-}
-
-@-webkit-keyframes scale-up-center {
-    0% {
-        -webkit-transform: scale(0.5);
-        transform: scale(0.5);
-    }
-    100% {
-        -webkit-transform: scale(1);
-        transform: scale(1);
-    }
-}
-@keyframes scale-up-center {
-    0% {
-        -webkit-transform: scale(0.5);
-        transform: scale(0.5);
-    }
-    100% {
-        -webkit-transform: scale(1);
-        transform: scale(1);
-    }
 }
 
 @media screen and (max-width: 700px) {
@@ -95,4 +42,20 @@ a {
     }
 }
 
+.fade-enter {
+    opacity: 0;
+}
 
+.fade-enter-active {
+    opacity: 1;
+    transition: opacity 600ms ease-in-out;
+}
+
+.fade-exit {
+    opacity: 1;
+}
+
+.fade-exit-active {
+    opacity: 0;
+    transition: opacity 600ms ease-in-out;
+}

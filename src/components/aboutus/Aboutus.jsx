@@ -4,7 +4,7 @@ import './aboutus.css';
 const Aboutus = () => {
     return(
         <div>
-            <p>Aboutus</p>
+            <p className="h-screen">Aboutus</p>
         </div>
     );
 }
