@@ -10,8 +10,8 @@ const App = () => {
     const location = useLocation();
 
     return (
-        <div className="App">
-            <div className="gradient__bg bg-gradient-to-br from-blue-600 to-gray-900">
+        <div className="flex flex-col">
+            <div className="gradient__bg flex-1 bg-gradient-to-br from-blue-600 to-gray-900">
                 <Navbar />
                 <TransitionGroup>
                     <CSSTransition key={location.key} classNames="fade" timeout={300}>
@@ -21,6 +21,10 @@ const App = () => {
                             <Route path="/contact" element={<Contact />} />
                             <Route path="/login" element={<Login />} />
                             <Route path="/signup" element={<Signup />} />
+                            <Route path='/privacy-policy' element={<Privacy />} />
+                            <Route path='/cookies-policy' element={<Cookie />} />
+                            <Route path='/terms-of-use' element={<Agreement />} />
+                            <Route path='/faqs' element={<Faqs />} />
                         </Routes>
                     </CSSTransition>
                 </TransitionGroup>
