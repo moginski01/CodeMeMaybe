@@ -1,15 +1,19 @@
 import React, { useState } from "react";
+import { useSignup } from "../../hooks/useSignup";
 
 const Signup = () => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [confirmPassword, setConfirmPassword] = useState("");
+    const {signup, error, isLoading} = useSignup()
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        console.log("Email:", email);
-        console.log("Password:", password);
-        console.log("Confirm Password:", confirmPassword);
+        
+        await signup(email, password)
+        // console.log("Email:", email);
+        // console.log("Password:", password);
+        // console.log("Confirm Password:", confirmPassword);
     };
 
     return (
@@ -30,8 +34,8 @@ const Signup = () => {
                         type="email"
                         name="email"
                         id="email"
-                        value={email}
                         onChange={(e) => setEmail(e.target.value)}
+                        value={email}
                         className="border rounded-lg py-2 px-3 w-full"
                         required
                     />
@@ -47,8 +51,8 @@ const Signup = () => {
                         type="password"
                         name="password"
                         id="password"
-                        value={password}
                         onChange={(e) => setPassword(e.target.value)}
+                        value={password}
                         className="border rounded-lg py-2 px-3 w-full"
                         required
                     />
@@ -64,18 +68,20 @@ const Signup = () => {
                         type="password"
                         name="confirmPassword"
                         id="confirmPassword"
-                        value={confirmPassword}
                         onChange={(e) => setConfirmPassword(e.target.value)}
+                        value={confirmPassword}
                         className="border rounded-lg py-2 px-3 w-full"
                         required
                     />
                 </div>
                 <button
+                    disabled={isLoading}
                     type="submit"
                     className="bg-indigo-500 text-white font-bold py-2 px-4 rounded-lg hover:bg-indigo-400"
                 >
                     Sign up
                 </button>
+                {error && <div className="error">{error}</div>}
             </form>
         </div>
     );

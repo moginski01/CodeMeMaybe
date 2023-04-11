@@ -3,7 +3,7 @@ import { Link, Route, Routes, useLocation } from "react-router-dom"
 import { TransitionGroup, CSSTransition } from 'react-transition-group';
 
 import { Navbar } from "./containers";
-import { Aboutus, Agreement, Contact, Cookie, Faqs, Footer, Home, Login, Privacy, Signup } from "./components";
+import { Aboutus, Agreement, Contact, Cookie, Faqs, Footer, Home, Login, Offerts, Privacy, Signup} from "./components";
 import './App.css';
 
 const App = () => {
@@ -25,6 +25,7 @@ const App = () => {
                             <Route path='/cookies-policy' element={<Cookie />} />
                             <Route path='/terms-of-use' element={<Agreement />} />
                             <Route path='/faqs' element={<Faqs />} />
+                            <Route path='/Offerts' element={<Offerts />} />
                         </Routes>
                     </CSSTransition>
                 </TransitionGroup>
