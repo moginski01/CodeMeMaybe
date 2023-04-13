@@ -1,13 +1,18 @@
 import React, { useState } from "react";
+import { useLogin } from "../../hooks/useLogin";
 
 const Login = () => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+    //pamiętać by dodać useLogin()!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!1
+    const {login, error, isLoading} = useLogin()
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        console.log("Email:", email);
-        console.log("Password:", password);
+
+        await login(email, password)
+        // console.log("Email:", email);
+        // console.log("Password:", password);
     };
 
     return (
@@ -28,8 +33,8 @@ const Login = () => {
                         type="email"
                         name="email"
                         id="email"
-                        value={email}
                         onChange={(e) => setEmail(e.target.value)}
+                        value={email}
                         className="border rounded-lg py-2 px-3 w-full"
                         required
                     />
@@ -45,8 +50,8 @@ const Login = () => {
                         type="password"
                         name="password"
                         id="password"
-                        value={password}
                         onChange={(e) => setPassword(e.target.value)}
+                        value={password}
                         className="border rounded-lg py-2 px-3 w-full"
                         required
                     />
