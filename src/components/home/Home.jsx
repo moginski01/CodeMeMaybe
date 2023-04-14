@@ -8,7 +8,7 @@ const Home = () => {
     return (
         <div className="codememaybe__header section__padding flex flex-col md:flex-row md:items-center md:justify-between mt-10">
             <div className="codememaybe__header_content max-w-lg mx-auto md:mx-0 md:text-left xs:my-40 text-center">
-                <h1 className="gradient__text text-6xl md:text-8xl mb-4">Let's work with us!</h1>
+                <h1 className="gradient__text text-6xl md:text-8xl mb-4 font-extrabold text-transparent text-xs bg-clip-text bg-gradient-to-r from-purple-400 to-pink-600">Let's work with us!</h1>
                 <p className="text-xl md:text-2xl mb-4">Welcome to our platform for programming tasks! Whether you're a developer looking for exciting
                     projects or someone in need of technical solutions, you've come to the right place.</p>
                 <p className="text-xl md:text-2xl mb-4">Our platform allows clients to easily post programming tasks and receive proposals from experienced

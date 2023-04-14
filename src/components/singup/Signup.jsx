@@ -5,12 +5,12 @@ const Signup = () => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [confirmPassword, setConfirmPassword] = useState("");
-    const {signup, error, isLoading} = useSignup()
+    const { signup, error, isLoading } = useSignup();
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        
-        await signup(email, password)
+
+        await signup(email, password);
         // console.log("Email:", email);
         // console.log("Password:", password);
         // console.log("Confirm Password:", confirmPassword);
@@ -88,3 +88,4 @@ const Signup = () => {
 };
 
 export default Signup;
+
