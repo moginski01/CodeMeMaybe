@@ -36,7 +36,7 @@ function Contact() {
     };
 
     return (
-        <div className="flex flex-col sm:flex-row divide-x hyphens-auto">
+        <div className="flex flex-col sm:flex-row divide-x hyphens-auto justify-center mt-5">
             <div className="w-1/2 flex-column">
                 <Map />
             </div>
