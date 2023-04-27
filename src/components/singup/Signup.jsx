@@ -18,7 +18,7 @@ const Signup = () => {
 
     return (
         <div className="h-screen flex flex-col items-center mt-20">
-            <h1 className="text-4xl font-bold mb-10">Sign up</h1>
+            <h1 className="text-white text-4xl font-bold mb-10">Sign up</h1>
             <form
                 onSubmit={handleSubmit}
                 className="bg-white p-10 rounded-lg shadow-lg w-80 sm:w-96"
