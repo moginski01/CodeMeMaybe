@@ -60,6 +60,10 @@ const Navbar = () => {
                     <span>{user.email}</span>
                     <button onClick={handleClick}>Log out</button>
                 </div>
+            <div className=''>
+                <span className='font-bold mr-4 text-white '>{user.email}</span>
+                <button className='px-4 py-2 text-white font-medium bg-purple-600 rounded-full sm:rounded-lg' onClick={handleClick}>Log out</button>
+            </div>
             )}
             {!user && (
                 <div className="flex justify-end items-center">
