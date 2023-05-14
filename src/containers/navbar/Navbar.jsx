@@ -1,20 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { RiMenu3Fill, RiCloseLine, RiMenu3Line } from "react-icons/ri";
 import logo from '../../assets/logo.png'
 import { Link, useNavigate } from "react-router-dom";
 import { useLogout } from '../../hooks/useLogout';
 import { useAuthContext } from '../../hooks/useAuthContext';
 
-// nie działa
-function HomeAfterLogin(){
-    const navigate = useNavigate();
-    const { user } = useAuthContext()
-
-    if(user){
-        navigate("/Offerts")
-    }
-    
-}   
 
 const Menu = ({ onClose }) => {
     const { user } = useAuthContext()
@@ -39,6 +29,13 @@ const Navbar = () => {
     const [toggleMenu, setToggleMenu] = useState(false);
     const { logout } = useLogout()
     const { user } = useAuthContext()
+    const navigate = useNavigate();
+
+    useEffect(() => {
+        if (user) {
+            navigate('/offerts');
+        }
+    }, [user, navigate]);
 
     const handleMenuClose = () => {
         setToggleMenu(false);
@@ -59,25 +56,25 @@ const Navbar = () => {
                 </div>
             </div>
             {user && (
-            <div>
-                <span>{user.email}</span>
-                <button onClick={handleClick}>Log out</button>
-            </div>
+                <div>
+                    <span>{user.email}</span>
+                    <button onClick={handleClick}>Log out</button>
+                </div>
             )}
             {!user && (
                 <div className="flex justify-end items-center">
-                <p className="mr-4 text-white capitalize">
-                    <Link to="/login">Login in</Link>
-                </p>
-                <button type="button" onClick={HomeAfterLogin} className="px-4 py-2 text-white font-medium bg-purple-600 rounded-full sm:rounded-lg">
-                    <Link to="/signup">Sign Up</Link>
-                </button>
-                <div className="ml-4 lg:hidden">
-                    {toggleMenu
-                        ? <RiCloseLine color="#fff" size={27} onClick={() => setToggleMenu(false)} />
-                        : <RiMenu3Line color="#fff" size={27} onClick={() => setToggleMenu(true)} />
-                    }
-                </div>
+                    <p className="mr-4 text-white capitalize">
+                        <Link to="/login">Login in</Link>
+                    </p>
+                    <button type="button" className="px-4 py-2 text-white font-medium bg-purple-600 rounded-full sm:rounded-lg">
+                        <Link to="/signup">Sign Up</Link>
+                    </button>
+                    <div className="ml-4 lg:hidden">
+                        {toggleMenu
+                            ? <RiCloseLine color="#fff" size={27} onClick={() => setToggleMenu(false)} />
+                            : <RiMenu3Line color="#fff" size={27} onClick={() => setToggleMenu(true)} />
+                        }
+                    </div>
                 </div>
             )}
 
