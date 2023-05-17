@@ -1,5 +1,44 @@
-const Workout = require('../models/workoutModel')
+const Workout = require('../models/taskModel')
 const mongoose = require('mongoose')
+
+
+const addTask = async (req, res) => {
+    try {
+        const { content, cost, date, languages, authorEmail } = req.body;
+
+        // Sprawdź, czy autor istnieje w bazie danych na podstawie adresu e-mail
+        const author = await User.findOne({ email: authorEmail });
+
+        if (!author) {
+        return res.status(404).json({ error: 'Nie znaleziono autora' });
+        }
+
+        // Utwórz nowe zadanie na podstawie przekazanych danych
+        const newTask = new Task({
+        content,
+        _id_autora: author._id,
+        _id_zatrudnionego: null, // Początkowo puste
+        koszt: cost,
+        data: date,
+        languages,
+        chat: null
+        });
+
+        // Zapisz nowe zadanie w bazie danych
+        const savedTask = await newTask.save();
+
+        res.status(201).json(savedTask);
+    } catch (error) {
+        console.error('Błąd dodawania zadania', error);
+        res.status(500).json({ error: 'Wystąpił błąd serwera' });
+    }
+}
+
+const getTasks = async (req, res) => {
+    // to compile
+}
+
+
 
 // get all workouts
 const getWorkouts = async (req, res) => {
@@ -95,9 +134,6 @@ const updateWorkout = async (req, res) => {
 
 
 module.exports = {
-    getWorkouts,
-    getWorkout,
-    createWorkout,
-    deleteWorkout,
-    updateWorkout
+    addTask,
+    getTasks
 }

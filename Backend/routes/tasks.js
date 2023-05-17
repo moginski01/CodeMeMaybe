@@ -1,10 +1,7 @@
 const express = require('express')
 const {
-    createWorkout,
-    getWorkouts,
-    getWorkout,
-    deleteWorkout,
-    updateWorkout
+    getTasks,
+    addTask
 } = require('../controllers/tasksController')
 
 const requireAuth = require('../middleware/requireAuth')
