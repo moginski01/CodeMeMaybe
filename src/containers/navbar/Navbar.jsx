@@ -19,7 +19,7 @@ const Menu = ({ onClose }) => {
                 </>
             )}
             {user && (
-                <p className="text-white capitalize mx-8 sm:my-2 xs:my-2" onClick={onClose}><Link to="/offerts">Offerts</Link></p>
+                <p className="text-white capitalize mx-8 sm:my-2 xs:my-2" onClick={onClose}><Link to="/tasks">Tasks</Link></p>
             )}
         </>
     );
@@ -33,7 +33,7 @@ const Navbar = () => {
 
     useEffect(() => {
         if (user) {
-            navigate('/offerts');
+            navigate('/tasks');
         }
     }, [user, navigate]);
 

@@ -14,6 +14,9 @@ const addTask = async (req, res) => {
         if (!author) {
         return res.status(404).json({ error: 'Nie znaleziono autora' });
         }
+
+        const currentDate = new Date();
+        const polishDate = new Date(currentDate.getTime() + (2 * 60 * 60 * 1000));
         
         // Utwórz nowe zadanie na podstawie przekazanych danych
         const newTask = new Task({
@@ -21,7 +24,7 @@ const addTask = async (req, res) => {
         _id_autora: author._id,
         _id_zatrudnionego: null, // Początkowo puste
         koszt: cost,
-        data: Date.now(),
+        data: polishDate,
         languages,
         chat: null
         });
