@@ -5,7 +5,7 @@ const {
     getWorkout,
     deleteWorkout,
     updateWorkout
-} = require('../controllers/workoutControllers')
+} = require('../controllers/tasksController')
 
 const requireAuth = require('../middleware/requireAuth')
 
@@ -15,19 +15,9 @@ const router = express.Router()
 router.use(requireAuth)
 
 //GET all workouets
-router.get('/', getWorkouts)
+router.get('/tasks', getTasks)
 
-//GET a single workout
-router.get('/:id',getWorkout)
-
-//POST a new workout
-router.post('/',createWorkout)
-
-//DELETE a workout
-router.delete('/:id',deleteWorkout)
-
-//UPDATE a workout
-router.patch('/:id',updateWorkout)
+router.post('/tasks/new_task', addTask)
 
 
 module.exports = router
