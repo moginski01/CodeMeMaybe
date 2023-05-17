@@ -12,7 +12,7 @@ const router = express.Router()
 // router.use(requireAuth)
 
 //GET all workouets
-router.get('/tasks', getTasks)
+router.get('/', getTasks)
 
 router.post('/new_task', addTask)
 
