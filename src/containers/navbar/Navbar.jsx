@@ -19,7 +19,10 @@ const Menu = ({ onClose }) => {
                 </>
             )}
             {user && (
+                <>
                 <p className="text-white capitalize mx-8 sm:my-2 xs:my-2" onClick={onClose}><Link to="/tasks">Tasks</Link></p>
+                <p className="text-white capitalize mx-8 sm:my-2 xs:my-2" onClick={onClose}><Link to="/tasks/new_task">Add task</Link></p>
+                </>
             )}
         </>
     );
@@ -31,11 +34,11 @@ const Navbar = () => {
     const { user } = useAuthContext()
     const navigate = useNavigate();
 
-    useEffect(() => {
-        if (user) {
-            navigate('/tasks');
-        }
-    }, [user, navigate]);
+    // useEffect(() => {
+    //     if (user) {
+    //         navigate('/tasks');
+    //     }
+    // }, [user, navigate]);
 
     const handleMenuClose = () => {
         setToggleMenu(false);

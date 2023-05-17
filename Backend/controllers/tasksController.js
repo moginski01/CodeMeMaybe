@@ -5,7 +5,6 @@ const User = require('../models/userModel')
 const addTask = async (req, res) => {
     try {
         const { content, cost, languages, authorEmail } = req.body;
-
         // Sprawdź, czy autor istnieje w bazie danych na podstawie adresu e-mail
         // console.log("here1")
         const author = await User.findOne({ email: authorEmail });
