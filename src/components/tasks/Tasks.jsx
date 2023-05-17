@@ -2,6 +2,7 @@ import React from 'react';
 import { useEffect, useState } from "react"
 
 import TaskDetails from './TaskDetails';
+import './tasks.css'
 
 const Tasks = () => {
 
