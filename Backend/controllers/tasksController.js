@@ -1,25 +1,27 @@
-const Workout = require('../models/taskModel')
+const Task = require('../models/taskModel')
 const mongoose = require('mongoose')
-
+const User = require('../models/userModel')
 
 const addTask = async (req, res) => {
     try {
-        const { content, cost, date, languages, authorEmail } = req.body;
+        const { content, cost, languages, authorEmail } = req.body;
 
         // Sprawdź, czy autor istnieje w bazie danych na podstawie adresu e-mail
+        // console.log("here1")
         const author = await User.findOne({ email: authorEmail });
+        // console.log("here2")
 
         if (!author) {
         return res.status(404).json({ error: 'Nie znaleziono autora' });
         }
-
+        
         // Utwórz nowe zadanie na podstawie przekazanych danych
         const newTask = new Task({
         content,
         _id_autora: author._id,
         _id_zatrudnionego: null, // Początkowo puste
         koszt: cost,
-        data: date,
+        data: Date.now(),
         languages,
         chat: null
         });

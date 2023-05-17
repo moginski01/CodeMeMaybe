@@ -35,7 +35,7 @@ const taskSchema = new Schema({
     _id_zatrudnionego: {
       type: Schema.Types.ObjectId,
       ref: 'User',
-      required: true
+      required: false
     },
     koszt: {
       type: Number,
