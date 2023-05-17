@@ -16,6 +16,55 @@ const userSchema = new Schema({
     }
 })
 
+const taskSchema = new Schema({
+    content: {
+      type: String,
+      required: true
+    },
+    _id_autora: {
+      type: Schema.Types.ObjectId,
+      ref: 'User',
+      required: true
+    },
+    _id_zatrudnionego: {
+      type: Schema.Types.ObjectId,
+      ref: 'User',
+      required: true
+    },
+    koszt: {
+      type: Number,
+      required: true
+    },
+    data: {
+      type: Date,
+      required: true
+    },
+    languages: {
+      type: [String],
+      default: []
+    },
+    chat: {
+      type: [{
+        text: {
+          type: String,
+          required: true
+        },
+        author: {
+          name: {
+            type: String,
+            required: true
+          },
+          email: {
+            type: String,
+            required: true
+          }
+        }
+      }],
+      default: []
+    }
+  });
+  
+
 //static signup method
 userSchema.statics.signup = async function(email, password){
 
