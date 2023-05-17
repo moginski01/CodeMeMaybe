@@ -38,9 +38,9 @@ const addTask = async (req, res) => {
 
 const getTasks = async (req, res) => {
     // to compile
-    const workouts = await Workout.find({}).sort({ createdAt: -1 })
+    const tasks = await Task.find({}).sort({ createdAt: -1 })
 
-    res.status(200).json(workouts)
+    res.status(200).json(tasks)
 }
 
 
