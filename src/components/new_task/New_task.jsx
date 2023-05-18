@@ -26,6 +26,7 @@ const NewTask = () => {
       console.log(newTaskData); // Sprawdzenie zawartości obiektu przed parsowaniem JSON-a
       console.log(JSON.stringify(newTaskData)); // Wyświetlanie JSON-a przed wysłaniem
       // Wyślij dane do backendu
+      //brzydkie naprawienie ścieżki do posta
       const response = await fetch('../api/tasks/new_task', {
         method: 'POST',
         headers: {
