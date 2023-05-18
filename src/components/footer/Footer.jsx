@@ -16,7 +16,7 @@ const Footer = () => {
                 <div className="md:flex md:items-center md:justify-between mx-auto">
                     <div className="footer-left flex flex-col md:flex-row justify-between items-center min-w-0">
                         <p className="text-gray-400 text-sm mr-10 md:text-center">
-                            © 2021 - 2022 Company Name. All rights reserved.
+                            © 2023 - 2023 CodeMeMaybe. All rights reserved.
                         </p>
                         <div className="mt-4 md:mt-0 flex">
                             <a
