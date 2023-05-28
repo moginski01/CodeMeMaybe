@@ -16,7 +16,7 @@ const router = express.Router()
 router.get('/', getTasks)
 
 router.post('/new_task', addTask)
-router.get('/my_tasks', getMyTasks)
+router.post('/my_tasks', getMyTasks)
 
 
 module.exports = router

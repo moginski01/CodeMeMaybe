@@ -60,7 +60,7 @@ const getMyTasks = async (req, res) => {
     // Znajdź zadania, które mają takie samo ID jak autor
     const tasks = await Task.find({ _id_autora: author._id }).sort({ createdAt: -1 });
 
-    console.log(author._id)
+    console.log(email)
     console.log(tasks)
     res.status(200).json(tasks);
   } catch (error) {

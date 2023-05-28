@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-const My_task = () => {
+const MyTask = () => {
   return (
     <>
       <h2 className="text-2xl font-bold mb-4 ml-4 text-white">
@@ -19,4 +19,4 @@ const My_task = () => {
   );
 };
 
-export default My_task;
+export default MyTask;
