@@ -5,17 +5,19 @@ import MyTask from './MyTask';
 
 const MyTasks = () => {
   const [tasks, setTasks] = useState(null);
+  const [tasksToBeCompleted, setTasksToBeCompleted] = useState(null);
   const user = JSON.parse(localStorage.getItem('user'));
   const email = user.email;
 
   useEffect(() => {
     const fetchTasks = async () => {
+      var mode = "delegated"
       const response = await fetch('/api/tasks/my_tasks', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ email }),
+        body: JSON.stringify({ email, mode}),
       });
       // const response = await fetch('/api/tasks')
       const json = await response.json();
@@ -25,7 +27,24 @@ const MyTasks = () => {
         console.log(json); // Poprawnie ustawione wartości tasks
       }
     }
+    const fetchTasksToBeCompleted = async () => {
+      var mode = "toBeCompleted"
+      const response = await fetch('/api/tasks/my_tasks', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({email, mode}),
+      });
+      // const response = await fetch('/api/tasks')
+      const json = await response.json();
 
+      if (response.ok) {
+        setTasksToBeCompleted(json);
+        console.log(json); // Poprawnie ustawione wartości tasks
+      }
+    }
+    fetchTasksToBeCompleted();
     fetchTasks();
   }, [])
   
@@ -48,6 +67,13 @@ const MyTasks = () => {
         Tasks to be completed
       </h2>
       <div className="tasks bg-gray-100 p-4 ml-8 rounded-lg shadow-md my-4 w-1/2">
+      <div className="home">
+          <div className="tasks">
+            {tasksToBeCompleted && tasksToBeCompleted.map(task => (
+              <MyTask task={task} key={task._id} />
+            ))}
+          </div>
+        </div>
         {/* Your code to display tasks to be completed */}
       </div>
     </>
