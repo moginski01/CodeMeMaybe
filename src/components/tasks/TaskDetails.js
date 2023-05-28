@@ -1,5 +1,5 @@
 import { Tasks } from "./Tasks"
-
+import { Link } from "react-router-dom";
 
 const asignTask = async (taskID) => {
 
@@ -28,7 +28,9 @@ const TaskDetails = ({ task}) => {
           <p><strong>Cost: </strong>{task.koszt}</p>
           <p>{task.data}</p>
           <p>Languages: {task.languages.join(', ')}</p>
+          <Link to="/tasks/my_tasks">
           <span onClick={handleAssignTask}>Activate Lasers</span>
+          </Link>
         </div>
       )
 }
