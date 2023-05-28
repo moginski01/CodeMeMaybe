@@ -14,8 +14,9 @@ const router = express.Router()
 // router.use(requireAuth)
 
 //GET all workouets
-router.get('/', getTasks)
-router.post('/', asignTask)
+// router.get('/', getTasks)
+router.post('/', getTasks)
+router.patch('/', asignTask)
 
 router.post('/new_task', addTask)
 router.post('/my_tasks', getMyTasks)

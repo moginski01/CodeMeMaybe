@@ -7,7 +7,7 @@ const asignTask = async (taskID) => {
   const user = JSON.parse(localStorage.getItem('user'));
   const email = user.email;
   const response = await fetch('/api/tasks', {
-    method: 'POST',
+    method: 'PATCH',
     headers: {
       'Content-Type': 'application/json',
     },
