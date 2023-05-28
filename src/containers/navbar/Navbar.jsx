@@ -22,6 +22,7 @@ const Menu = ({ onClose }) => {
                 <>
                 <p className="text-white capitalize mx-8 sm:my-2 xs:my-2" onClick={onClose}><Link to="/tasks">Tasks</Link></p>
                 <p className="text-white capitalize mx-8 sm:my-2 xs:my-2" onClick={onClose}><Link to="/tasks/new_task">Add task</Link></p>
+                <p className="text-white capitalize mx-8 sm:my-2 xs:my-2" onClick={onClose}><Link to="/tasks/my_tasks">My task</Link></p>
                 </>
             )}
         </>
