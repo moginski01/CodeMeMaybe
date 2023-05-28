@@ -15,7 +15,7 @@ const Tasks = () => {
   
         if (response.ok) {
           setTasks(json)
-          console.log(tasks)
+          // console.log(tasks)
         }
       }
   

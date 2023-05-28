@@ -45,6 +45,29 @@ const getTasks = async (req, res) => {
     res.status(200).json(tasks)
 }
 
+const asignTask = async (req, res) => {
+  const { email,taskID } = req.body;
+  // Sprawdź, czy autor istnieje w bazie danych na podstawie adresu e-mail
+  const author = await User.findOne({ email: email });
+    // to compile
+  if (!author) {
+    return res.status(404);
+  }
+
+  const filter = { _id: taskID }; // Kryterium wyszukiwania po polu user._id
+  const update = { _id_zatrudnionego: author._id }; // Aktualizowane dane
+
+  const updatedTask = await Task.findOneAndUpdate(filter, update, {
+    new: true // Ustawienie tej opcji sprawi, że metoda zwróci zaktualizowany dokument
+  });
+
+  const tasks = await Task.find({}).sort({ createdAt: -1 })
+
+  res.status(200).json(updatedTask)
+}
+
+
+
 
 const getMyTasks = async (req, res) => {
   try {
@@ -73,5 +96,6 @@ const getMyTasks = async (req, res) => {
 module.exports = {
     addTask,
     getTasks,
+    asignTask,
     getMyTasks
 }

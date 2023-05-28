@@ -2,6 +2,7 @@ const express = require('express')
 const {
     getTasks,
     getMyTasks,
+    asignTask,
     addTask
 } = require('../controllers/tasksController')
 
@@ -14,6 +15,7 @@ const router = express.Router()
 
 //GET all workouets
 router.get('/', getTasks)
+router.post('/', asignTask)
 
 router.post('/new_task', addTask)
 router.post('/my_tasks', getMyTasks)
