@@ -48,18 +48,20 @@ const getTasks = async (req, res) => {
 
 const getMyTasks = async (req, res) => {
   try {
-    const { authorEmail } = req.body;
+    const { email } = req.body;
 
     // Sprawdź, czy autor istnieje w bazie danych na podstawie adresu e-mail
-    const author = await User.findOne({ email: authorEmail });
+    const author = await User.findOne({ email: email });
 
     if (!author) {
       return res.status(404).json({ message: "Autor nie został znaleziony." });
     }
 
     // Znajdź zadania, które mają takie samo ID jak autor
-    const tasks = await Task.find({ author: author._id }).sort({ createdAt: -1 });
+    const tasks = await Task.find({ _id_autora: author._id }).sort({ createdAt: -1 });
 
+    console.log(author._id)
+    console.log(tasks)
     res.status(200).json(tasks);
   } catch (error) {
     console.error(error);
