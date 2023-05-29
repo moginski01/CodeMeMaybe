@@ -15,6 +15,7 @@ const MyTasks = () => {
       const response = await fetch('/api/tasks/my_tasks', {
         method: 'POST',
         headers: {
+          Authorization: `Bearer ${user.token}`,
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({ email, mode}),
@@ -32,6 +33,7 @@ const MyTasks = () => {
       const response = await fetch('/api/tasks/my_tasks', {
         method: 'POST',
         headers: {
+          Authorization: `Bearer ${user.token}`,
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({email, mode}),

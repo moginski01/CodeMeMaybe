@@ -9,6 +9,7 @@ const asignTask = async (taskID) => {
   const response = await fetch('/api/tasks', {
     method: 'PATCH',
     headers: {
+      Authorization: `Bearer ${user.token}`,
       'Content-Type': 'application/json',
     },
     body: JSON.stringify({ email, taskID}),
@@ -29,7 +30,7 @@ const TaskDetails = ({ task}) => {
           <p>{task.data}</p>
           <p>Languages: {task.languages.join(', ')}</p>
           <Link to="/tasks/my_tasks">
-          <span onClick={handleAssignTask}>Activate Lasers</span>
+          <span onClick={handleAssignTask}>Take task</span>
           </Link>
         </div>
       )

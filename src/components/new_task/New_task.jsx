@@ -30,6 +30,7 @@ const NewTask = () => {
       const response = await fetch('../api/tasks/new_task', {
         method: 'POST',
         headers: {
+          Authorization: `Bearer ${user.token}`,
           'Content-Type': 'application/json',
         },
         body: JSON.stringify(newTaskData),

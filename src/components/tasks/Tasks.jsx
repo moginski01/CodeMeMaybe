@@ -15,6 +15,7 @@ const Tasks = () => {
         const response = await fetch('/api/tasks', {
           method: 'POST',
           headers: {
+            Authorization: `Bearer ${user.token}`,
             'Content-Type': 'application/json',
           },
           body: JSON.stringify({ email }),
