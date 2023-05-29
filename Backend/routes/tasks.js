@@ -3,7 +3,8 @@ const {
     getTasks,
     getMyTasks,
     asignTask,
-    addTask
+    addTask,
+    updateMyTasks
 } = require('../controllers/tasksController')
 
 const requireAuth = require('../middleware/requireAuth')
@@ -20,6 +21,7 @@ router.patch('/', asignTask)
 
 router.post('/new_task', addTask)
 router.post('/my_tasks', getMyTasks)
+router.patch('/my_tasks', updateMyTasks)
 
 
 module.exports = router

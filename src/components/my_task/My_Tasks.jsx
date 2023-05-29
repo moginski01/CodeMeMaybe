@@ -2,6 +2,7 @@ import React from 'react';
 import { useEffect, useState } from "react"
 
 import MyTask from './MyTask';
+import MyTaskToComplete from './MyTaskToComplete';
 
 const MyTasks = () => {
   const [tasks, setTasks] = useState(null);
@@ -72,7 +73,7 @@ const MyTasks = () => {
       <div className="home">
           <div className="tasks">
             {tasksToBeCompleted && tasksToBeCompleted.map(task => (
-              <MyTask task={task} key={task._id} />
+              <MyTaskToComplete task={task} key={task._id} />
             ))}
           </div>
         </div>

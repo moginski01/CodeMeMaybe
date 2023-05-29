@@ -6,9 +6,7 @@ const addTask = async (req, res) => {
     try {
         const { content, cost, languages, authorEmail } = req.body;
         // Sprawdź, czy autor istnieje w bazie danych na podstawie adresu e-mail
-        // console.log("here1")
         const author = await User.findOne({ email: authorEmail });
-        // console.log("here2")
 
         if (!author) {
         return res.status(404).json({ error: 'Nie znaleziono autora' });
@@ -58,6 +56,25 @@ const getTasks = async (req, res) => {
   res.status(200).json(tasks);
 };
 
+const updateMyTasks = async (req, res) => {
+  const { email,taskID } = req.body;
+
+  const author = await User.findOne({ email: email });
+
+  if (!author) {
+    return res.status(404).send("Author not found");
+  }
+
+  const filter = { _id: taskID }; // Kryterium wyszukiwania po polu user._id
+  const update = { _id_zatrudnionego: null }; // Aktualizowane dane
+
+  const updatedTask = await Task.findOneAndUpdate(filter, update, {
+    new: true // Ustawienie tej opcji sprawi, że metoda zwróci zaktualizowany dokument
+  });
+
+  res.status(200).json(updatedTask);
+};
+
 const asignTask = async (req, res) => {
   const { email,taskID } = req.body;
   // Sprawdź, czy autor istnieje w bazie danych na podstawie adresu e-mail
@@ -73,8 +90,6 @@ const asignTask = async (req, res) => {
   const updatedTask = await Task.findOneAndUpdate(filter, update, {
     new: true // Ustawienie tej opcji sprawi, że metoda zwróci zaktualizowany dokument
   });
-
-  const tasks = await Task.find({}).sort({ createdAt: -1 })
 
   res.status(200).json(updatedTask)
 }
@@ -95,15 +110,11 @@ const getMyTasks = async (req, res) => {
     if(mode==="toBeCompleted"){
       const tasks = await Task.find({ _id_zatrudnionego: author._id }).sort({ createdAt: -1 });
 
-      console.log(email)
-      console.log(tasks)
       res.status(200).json(tasks);
     }else{
       // Znajdź zadania, które mają takie samo ID jak autor
       const tasks = await Task.find({ _id_autora: author._id }).sort({ createdAt: -1 });
 
-      console.log(email)
-      console.log(tasks)
       res.status(200).json(tasks);
     }
 
@@ -118,5 +129,6 @@ module.exports = {
     addTask,
     getTasks,
     asignTask,
-    getMyTasks
+    getMyTasks,
+    updateMyTasks
 }
