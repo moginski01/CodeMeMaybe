@@ -25,7 +25,10 @@ const addTask = async (req, res) => {
         koszt: cost,
         data: polishDate,
         languages,
-        chat: null
+        chat: null,
+        isPaid: false,
+        is_accepted_by_owner: false,
+        is_accepted_by_creator: false
         });
 
         // Zapisz nowe zadanie w bazie danych
