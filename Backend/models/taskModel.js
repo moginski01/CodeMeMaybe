@@ -67,6 +67,18 @@ const taskSchema = new Schema({
         }
       }],
       default: []
+    },
+    isPaid: {
+      type: Boolean,
+      required: false,
+    },
+    is_accepted_by_owner: {
+      type: Boolean,
+      required: false,
+    },
+    is_accepted_by_creator: {
+      type: Boolean,
+      required: false
     }
   });
 
