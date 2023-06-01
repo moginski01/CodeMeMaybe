@@ -8,7 +8,7 @@ const submitTask = async (taskID,message) => {
   console.log(message)
   const user = JSON.parse(localStorage.getItem('user'));
   const email = user.email;
-  var mode = "submit"
+  var mode = "submit_creator"
   const response = await fetch('/api/tasks/my_tasks',{
     method: 'POST',
     headers:{

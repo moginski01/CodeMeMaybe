@@ -116,15 +116,24 @@ const getMyTasks = async (req, res) => {
       const tasks = await Task.find({ _id_autora: author._id }).sort({ createdAt: -1 });
 
       res.status(200).json(tasks);
-    }else{
+    }else if(mode==="submit_creator"){
       //submit taska przez jednego z użytkowników w tym przypadku tego który wysyła link do gita
       const { taskID, message } = req.body
-      console.log("Hello")
-      console.log(taskID)
-      console.log(message)
         
       const filter = { _id: taskID }; // Kryterium wyszukiwania po polu user._id
-      const update = { is_accepted_by_creator: true}; // Aktualizowane dane
+      const update = { is_accepted_by_creator: true, code_link: message}; // Aktualizowane dane
+    
+      const updatedTask = await Task.findOneAndUpdate(filter, update, {
+        new: true // Ustawienie tej opcji sprawi, że metoda zwróci zaktualizowany dokument
+      });
+
+      res.status(200).json(updatedTask)
+    }else{
+      const { taskID} = req.body
+      console.log(taskID)
+      console.log("owner")
+      const filter = { _id: taskID }; // Kryterium wyszukiwania po polu user._id
+      const update = { is_accepted_by_owner: true}; // Aktualizowane dane
     
       const updatedTask = await Task.findOneAndUpdate(filter, update, {
         new: true // Ustawienie tej opcji sprawi, że metoda zwróci zaktualizowany dokument
