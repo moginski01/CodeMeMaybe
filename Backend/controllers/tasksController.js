@@ -103,7 +103,7 @@ const getMyTasks = async (req, res) => {
 
     // Sprawdź, czy autor istnieje w bazie danych na podstawie adresu e-mail
     const author = await User.findOne({ email: email });
-
+    
     if (!author) {
       return res.status(404).json({ message: "Autor nie został znaleziony." });
     }
@@ -117,11 +117,20 @@ const getMyTasks = async (req, res) => {
 
       res.status(200).json(tasks);
     }else{
+      //submit taska przez jednego z użytkowników w tym przypadku tego który wysyła link do gita
       const { taskID, message } = req.body
       console.log("Hello")
       console.log(taskID)
       console.log(message)
+        
+      const filter = { _id: taskID }; // Kryterium wyszukiwania po polu user._id
+      const update = { is_accepted_by_creator: true}; // Aktualizowane dane
+    
+      const updatedTask = await Task.findOneAndUpdate(filter, update, {
+        new: true // Ustawienie tej opcji sprawi, że metoda zwróci zaktualizowany dokument
+      });
 
+      res.status(200).json(updatedTask)
     }
 
   } catch (error) {
