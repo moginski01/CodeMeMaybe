@@ -6,7 +6,7 @@ const Privacy = () => {
     <>
       <div class="text-white mb-5 ml-5">
         <div class="">
-          <p class="text-2xl font-bold mb-4">Polityka prywatności</p>
+          <p class="text-2xl font-bold mb-4">Privacy Policy</p>
 
           <p className="text-xl font-bold mb-4">
             This privacy policy describes how we process information about you,

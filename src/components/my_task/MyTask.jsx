@@ -7,6 +7,7 @@ const MyTask = ({ task: task }) => {
       <p><strong>Cost: </strong>{task.koszt}</p>
       <p>{task.data}</p>
       <p>Languages: {task.languages.join(', ')}</p>
+      <span>Submit</span>
     </div>
   )
 };

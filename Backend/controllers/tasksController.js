@@ -99,7 +99,7 @@ const asignTask = async (req, res) => {
 
 const getMyTasks = async (req, res) => {
   try {
-    const { email, mode } = req.body;
+    const { email, mode} = req.body;
 
     // Sprawdź, czy autor istnieje w bazie danych na podstawie adresu e-mail
     const author = await User.findOne({ email: email });
@@ -111,11 +111,17 @@ const getMyTasks = async (req, res) => {
       const tasks = await Task.find({ _id_zatrudnionego: author._id }).sort({ createdAt: -1 });
 
       res.status(200).json(tasks);
-    }else{
+    }else if(mode==="delegated"){
       // Znajdź zadania, które mają takie samo ID jak autor
       const tasks = await Task.find({ _id_autora: author._id }).sort({ createdAt: -1 });
 
       res.status(200).json(tasks);
+    }else{
+      const { taskID, message } = req.body
+      console.log("Hello")
+      console.log(taskID)
+      console.log(message)
+
     }
 
   } catch (error) {
