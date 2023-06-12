@@ -118,6 +118,8 @@ const getMyTasks = async (req, res) => {
       res.status(200).json(tasks);
     }else if(mode==="submit_creator"){
       //submit taska przez jednego z użytkowników w tym przypadku tego który wysyła link do gita
+      //płatność creator -> CodeMeMaybe
+      
       const { taskID, message } = req.body
         
       const filter = { _id: taskID }; // Kryterium wyszukiwania po polu user._id
@@ -138,6 +140,9 @@ const getMyTasks = async (req, res) => {
       const updatedTask = await Task.findOneAndUpdate(filter, update, {
         new: true // Ustawienie tej opcji sprawi, że metoda zwróci zaktualizowany dokument
       });
+
+
+      
 
       res.status(200).json(updatedTask)
     }
