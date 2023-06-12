@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import PayButton from "../PayButton";
 
 
 const submitTask = async (taskID,message) => {
@@ -64,7 +65,9 @@ const MyTaskToComplete = ({ task: task }) => {
         />
         <button onClick={handleTask}>Submit Task</button>
       </div>
+      <div><PayButton></PayButton></div>
     </div>
+
   );
 };
 

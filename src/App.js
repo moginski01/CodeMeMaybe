@@ -6,6 +6,7 @@ import { Navbar } from "./containers";
 import { Aboutus, Agreement, Contact, Cookie, Faqs, Footer, Home, Login, Tasks, Privacy, Signup, NewTask, MyTasks} from "./components";
 import './App.css';
 
+
 const App = () => {
     const location = useLocation();
 
