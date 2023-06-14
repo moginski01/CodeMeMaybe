@@ -10,12 +10,12 @@ const PayButton = ({ cartItems }) => {
             content: cartItems.content,
             koszt: cartItems.koszt
         })
-            .then((res) => {
-                if (res.data.url) {
-                    window.location.href = res.data.url;
-                }
-            })
-            .catch((err) => console.log(err.message));
+        .then((res)=>{
+            if(res.data.url){
+                window.location.href = res.data.url;
+            }
+        })
+            .catch((err)=> console.log(err.message));
     };
     return (
         <button onClick={() => handleCheckout()}>Check Out</button>
