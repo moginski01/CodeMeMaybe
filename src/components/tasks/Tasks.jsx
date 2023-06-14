@@ -2,7 +2,6 @@ import React from 'react';
 import { useEffect, useState } from "react"
 
 import TaskDetails from './TaskDetails';
-import './tasks.css'
 
 const Tasks = () => {
 
@@ -24,7 +23,6 @@ const Tasks = () => {
   
         if (response.ok) {
           setTasks(json)
-          // console.log(tasks)
         }
       }
   
@@ -32,8 +30,8 @@ const Tasks = () => {
     }, [])
   
     return (
-      <div className="home">
-        <div className="tasks">
+      <div className="grid grid-cols-4 gap-10">
+        <div className="col-span-3 space-y-5">
           {tasks && tasks.map(task => (
             <TaskDetails task={task} key={task._id} />
           ))}
@@ -41,6 +39,5 @@ const Tasks = () => {
       </div>
     )
   }
-
 
 export default Tasks;
