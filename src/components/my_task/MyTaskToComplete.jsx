@@ -3,20 +3,20 @@ import { Link } from "react-router-dom";
 import PayButton from "../PayButton";
 
 
-const submitTask = async (taskID,message) => {
+const submitTask = async (taskID, message) => {
 
   console.log(taskID)
   console.log(message)
   const user = JSON.parse(localStorage.getItem('user'));
   const email = user.email;
   var mode = "submit_creator"
-  const response = await fetch('/api/tasks/my_tasks',{
+  const response = await fetch('/api/tasks/my_tasks', {
     method: 'POST',
-    headers:{
+    headers: {
       Authorization: `Bearer ${user.token}`,
       'Content-Type': 'application/json'
     },
-    body: JSON.stringify({email,mode,taskID,message}),
+    body: JSON.stringify({ email, mode, taskID, message }),
   })
 
   const json = await response.json();
@@ -27,13 +27,13 @@ const abandonTask = async (taskID) => {
   console.log(taskID)
   const user = JSON.parse(localStorage.getItem('user'));
   const email = user.email;
-  const response = await fetch('/api/tasks/my_tasks',{
+  const response = await fetch('/api/tasks/my_tasks', {
     method: 'PATCH',
-    headers:{
+    headers: {
       Authorization: `Bearer ${user.token}`,
       'Content-Type': 'application/json'
     },
-    body: JSON.stringify({email,taskID}),
+    body: JSON.stringify({ email, taskID }),
   })
   const json = await response.json();
 }
@@ -44,30 +44,31 @@ const MyTaskToComplete = ({ task: task }) => {
     abandonTask(task._id);
   }
   const handleTask = () => {
-    submitTask(task._id,taskSubmission);
+    submitTask(task._id, taskSubmission);
   }
 
 
   return (
-    <div className="task-details">
-      <h4>{task.content}</h4>
-      <p><strong>Cost: </strong>{task.koszt}</p>
-      <p>{task.data}</p>
-      <p>Languages: {task.languages.join(', ')}</p>
-      <Link to="/tasks/my_tasks">
-        <span onClick={handleAbandonTask}>Abandon task</span>
-      </Link>
-      <div>
+    <div className="p-3 border-b border-gray-200">
+      <h4 className="font-bold text-lg mb-1">{task.content}</h4>
+      <p className="text-gray-600"><strong>Cost: </strong>{task.koszt}</p>
+      <p className="text-gray-600">{task.data}</p>
+      <p className="text-gray-600">Languages: {task.languages.join(', ')}</p>
+      <div className="flex items-center mt-2">
         <input
           type="text"
           value={taskSubmission}
           onChange={(e) => setTaskSubmission(e.target.value)}
+          className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
         />
-        <button onClick={handleTask}>Submit Task</button>
+        <button onClick={handleTask} className="ml-3 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
+          Submit Task
+        </button>
       </div>
-      <div><PayButton cartItems={task}></PayButton></div>
+      <span className="ml-3 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
+        <PayButton cartItems={task}></PayButton>
+      </span>
     </div>
-
   );
 };
 

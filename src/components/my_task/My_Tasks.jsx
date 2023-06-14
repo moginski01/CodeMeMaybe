@@ -19,7 +19,7 @@ const MyTasks = () => {
           Authorization: `Bearer ${user.token}`,
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ email, mode}),
+        body: JSON.stringify({ email, mode }),
       });
       // const response = await fetch('/api/tasks')
       const json = await response.json();
@@ -37,7 +37,7 @@ const MyTasks = () => {
           Authorization: `Bearer ${user.token}`,
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({email, mode}),
+        body: JSON.stringify({ email, mode }),
       });
       // const response = await fetch('/api/tasks')
       const json = await response.json();
@@ -50,14 +50,13 @@ const MyTasks = () => {
     fetchTasksToBeCompleted();
     fetchTasks();
   }, [])
-  
+
   return (
     <>
       <h2 className="text-2xl font-bold mb-4 ml-4 text-white">
         Delegated tasks
       </h2>
       <div className="tasks bg-gray-100 p-4 ml-8 rounded-lg shadow-md my-4 w-1/2">
-        {/* Your code to display delegated tasks */}
         <div className="home">
           <div className="tasks">
             {tasks && tasks.map(task => (
@@ -70,14 +69,13 @@ const MyTasks = () => {
         Tasks to be completed
       </h2>
       <div className="tasks bg-gray-100 p-4 ml-8 rounded-lg shadow-md my-4 w-1/2">
-      <div className="home">
+        <div className="home">
           <div className="tasks">
             {tasksToBeCompleted && tasksToBeCompleted.map(task => (
               <MyTaskToComplete task={task} key={task._id} />
             ))}
           </div>
         </div>
-        {/* Your code to display tasks to be completed */}
       </div>
     </>
   );
