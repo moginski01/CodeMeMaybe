@@ -49,24 +49,21 @@ const taskSchema = new Schema({
       type: [String],
       default: []
     },
-    chat: {
-      type: [{
-        text: {
-          type: String,
-          required: true
-        },
-        author: {
-          name: {
-            type: String,
-            required: true
-          },
-          email: {
-            type: String,
-            required: true
-          }
-        }
-      }],
-      default: []
+    code_link: {
+      type: String,
+      required: false,
+    },
+    isPaid: {
+      type: Boolean,
+      required: false,
+    },
+    is_accepted_by_owner: {
+      type: Boolean,
+      required: false,
+    },
+    is_accepted_by_creator: {
+      type: Boolean,
+      required: false
     }
   });
 

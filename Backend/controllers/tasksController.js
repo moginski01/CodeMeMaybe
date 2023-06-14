@@ -6,9 +6,7 @@ const addTask = async (req, res) => {
     try {
         const { content, cost, languages, authorEmail } = req.body;
         // Sprawdź, czy autor istnieje w bazie danych na podstawie adresu e-mail
-        // console.log("here1")
         const author = await User.findOne({ email: authorEmail });
-        // console.log("here2")
 
         if (!author) {
         return res.status(404).json({ error: 'Nie znaleziono autora' });
@@ -25,7 +23,10 @@ const addTask = async (req, res) => {
         koszt: cost,
         data: polishDate,
         languages,
-        chat: null
+        chat: null,
+        isPaid: false,
+        is_accepted_by_owner: false,
+        is_accepted_by_creator: false
         });
 
         // Zapisz nowe zadanie w bazie danych
@@ -39,108 +40,124 @@ const addTask = async (req, res) => {
 }
 
 const getTasks = async (req, res) => {
+  const { email } = req.body;
+
+  const author = await User.findOne({ email: email });
+
+  if (!author) {
+    return res.status(404).send("Author not found");
+  }
+
+  const tasks = await Task.find({
+    _id_autora: { $ne: author._id },
+    _id_zatrudnionego: null,
+  }).sort({ createdAt: -1 });
+
+  res.status(200).json(tasks);
+};
+
+const updateMyTasks = async (req, res) => {
+  const { email,taskID } = req.body;
+
+  const author = await User.findOne({ email: email });
+
+  if (!author) {
+    return res.status(404).send("Author not found");
+  }
+
+  const filter = { _id: taskID }; // Kryterium wyszukiwania po polu user._id
+  const update = { _id_zatrudnionego: null }; // Aktualizowane dane
+
+  const updatedTask = await Task.findOneAndUpdate(filter, update, {
+    new: true // Ustawienie tej opcji sprawi, że metoda zwróci zaktualizowany dokument
+  });
+
+  res.status(200).json(updatedTask);
+};
+
+const asignTask = async (req, res) => {
+  const { email,taskID } = req.body;
+  // Sprawdź, czy autor istnieje w bazie danych na podstawie adresu e-mail
+  const author = await User.findOne({ email: email });
     // to compile
-    const tasks = await Task.find({}).sort({ createdAt: -1 })
+  if (!author) {
+    return res.status(404);
+  }
 
-    res.status(200).json(tasks)
+  const filter = { _id: taskID }; // Kryterium wyszukiwania po polu user._id
+  const update = { _id_zatrudnionego: author._id }; // Aktualizowane dane
+
+  const updatedTask = await Task.findOneAndUpdate(filter, update, {
+    new: true // Ustawienie tej opcji sprawi, że metoda zwróci zaktualizowany dokument
+  });
+
+  res.status(200).json(updatedTask)
 }
 
 
 
-// get all workouts
-const getWorkouts = async (req, res) => {
-    const user_id = req.user._id
 
-    const workouts = await Workout.find({ user_id }).sort({ createdAt: -1 })
+const getMyTasks = async (req, res) => {
+  try {
+    const { email, mode} = req.body;
 
-    res.status(200).json(workouts)
-}
+    // Sprawdź, czy autor istnieje w bazie danych na podstawie adresu e-mail
+    const author = await User.findOne({ email: email });
+    
+    if (!author) {
+      return res.status(404).json({ message: "Autor nie został znaleziony." });
+    }
+    if(mode==="toBeCompleted"){
+      const tasks = await Task.find({ _id_zatrudnionego: author._id }).sort({ createdAt: -1 });
 
-// get a single workout
-const getWorkout = async (req, res) => {
-    const { id } = req.params
+      res.status(200).json(tasks);
+    }else if(mode==="delegated"){
+      // Znajdź zadania, które mają takie samo ID jak autor
+      const tasks = await Task.find({ _id_autora: author._id }).sort({ createdAt: -1 });
 
-    if (!mongoose.Types.ObjectId.isValid(id)) {
-        return res.status(404).json({ error: 'No such workout' })
+      res.status(200).json(tasks);
+    }else if(mode==="submit_creator"){
+      //submit taska przez jednego z użytkowników w tym przypadku tego który wysyła link do gita
+      //płatność creator -> CodeMeMaybe
+      
+      const { taskID, message } = req.body
+        
+      const filter = { _id: taskID }; // Kryterium wyszukiwania po polu user._id
+      const update = { is_accepted_by_creator: true, code_link: message}; // Aktualizowane dane
+    
+      const updatedTask = await Task.findOneAndUpdate(filter, update, {
+        new: true // Ustawienie tej opcji sprawi, że metoda zwróci zaktualizowany dokument
+      });
+
+      res.status(200).json(updatedTask)
+    }else{
+      const { taskID} = req.body
+      console.log(taskID)
+      console.log("owner")
+      const filter = { _id: taskID }; // Kryterium wyszukiwania po polu user._id
+      const update = { is_accepted_by_owner: true}; // Aktualizowane dane
+    
+      const updatedTask = await Task.findOneAndUpdate(filter, update, {
+        new: true // Ustawienie tej opcji sprawi, że metoda zwróci zaktualizowany dokument
+      });
+
+
+      
+
+      res.status(200).json(updatedTask)
     }
 
-    const workout = await Workout.findById(id)
-
-    if (!workout) {
-        return res.status(404).json({ error: 'No such workout' })
-    }
-
-    res.status(200).json(workout)
-}
-
-
-// create new workout
-const createWorkout = async (req, res) => {
-    const { title, load, reps } = req.body
-
-    let emptyFields = []
-
-    if (!title) {
-        emptyFields.push('title')
-    }
-    if (!load) {
-        emptyFields.push('load')
-    }
-    if (!reps) {
-        emptyFields.push('reps')
-    }
-    if (emptyFields.length > 0) {
-        return res.status(400).json({ error: 'Please fill in all the fields', emptyFields })
-    }
-
-    // add doc to db
-    try {
-        const user_id = req.user._id
-        const workout = await Workout.create({ title, load, reps, user_id })
-        res.status(200).json(workout)
-    } catch (error) {
-        res.status(400).json({ error: error.message })
-    }
-}
-
-// delete a workout
-const deleteWorkout = async (req, res) => {
-    const { id } = req.params
-
-    if (!mongoose.Types.ObjectId.isValid(id)) {
-        return res.status(404).json({ error: 'No such workout' })
-    }
-
-    const workout = await Workout.findOneAndDelete({ _id: id })
-
-    if (!workout) {
-        return res.status(400).json({ error: 'No such workout' })
-    }
-
-    res.status(200).json(workout)
-}
-
-// update a workout
-const updateWorkout = async (req, res) => {
-    const { id } = req.params
-
-    if (!mongoose.Types.ObjectId.isValid(id)) {
-        return res.status(404).json({ error: 'No such workout' })
-    }
-
-    const workout = await Workout.findOneAndUpdate({ _id: id }, {
-        ...req.body
-    })
-
-    if (!workout) {
-        return res.status(400).json({ error: 'No such workout' })
-    }
-
-    res.status(200).json(workout)
-}
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Wystąpił błąd serwera." });
+  }
+};
 
 
 module.exports = {
     addTask,
-    getTasks
+    getTasks,
+    asignTask,
+    getMyTasks,
+    updateMyTasks
 }

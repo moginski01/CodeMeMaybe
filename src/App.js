@@ -3,15 +3,16 @@ import { Link, Route, Routes, useLocation } from "react-router-dom"
 import { TransitionGroup, CSSTransition } from 'react-transition-group';
 
 import { Navbar } from "./containers";
-import { Aboutus, Agreement, Contact, Cookie, Faqs, Footer, Home, Login, Tasks, Privacy, Signup, NewTask} from "./components";
+import { Aboutus, Agreement, Contact, Cookie, Faqs, Footer, Home, Login, Tasks, Privacy, Signup, NewTask, MyTasks} from "./components";
 import './App.css';
+
 
 const App = () => {
     const location = useLocation();
 
     return (
-        <div className="flex flex-col">
-            <div className="gradient__bg flex-1 bg-gradient-to-br from-blue-600 to-gray-900">
+        <div className="flex flex-col min-h-screen">
+            <div className="flex-grow gradient__bg bg-gradient-to-br from-blue-600 to-gray-900">
                 <Navbar />
                 <TransitionGroup>
                     <CSSTransition key={location.key} classNames="fade" timeout={300}>
@@ -27,11 +28,12 @@ const App = () => {
                             <Route path='/faqs' element={<Faqs />} />
                             <Route path='/tasks' element={<Tasks />} />
                             <Route path='/tasks/new_task' element={<NewTask />} />
+                            <Route path='/tasks/my_tasks' element={<MyTasks />} />
                         </Routes>
                     </CSSTransition>
                 </TransitionGroup>
-                <Footer />
             </div>
+            <Footer />
         </div>
     );
 };
