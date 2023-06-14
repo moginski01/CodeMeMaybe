@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import PayButton from "../PayButton";
 
 const submitTask = async (taskID) => {
 
@@ -31,6 +32,7 @@ const MyTask = ({ task: task }) => {
       <p>{task.data}</p>
       <p>Languages: {task.languages.join(', ')}</p>
       <span onClick={handleTask}>Submit</span>
+      <div><PayButton cartItems={task}></PayButton></div>
     </div>
   )
 };

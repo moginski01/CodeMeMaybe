@@ -65,7 +65,6 @@ const MyTaskToComplete = ({ task: task }) => {
         />
         <button onClick={handleTask}>Submit Task</button>
       </div>
-      <div><PayButton cartItems={task}></PayButton></div>
     </div>
 
   );

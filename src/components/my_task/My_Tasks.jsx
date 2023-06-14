@@ -3,6 +3,7 @@ import { useEffect, useState } from "react"
 
 import MyTask from './MyTask';
 import MyTaskToComplete from './MyTaskToComplete';
+import PayButton from "../PayButton";
 
 const MyTasks = () => {
   const [tasks, setTasks] = useState(null);

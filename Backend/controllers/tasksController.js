@@ -113,9 +113,10 @@ const getMyTasks = async (req, res) => {
       res.status(200).json(tasks);
     }else if(mode==="delegated"){
       // Znajdź zadania, które mają takie samo ID jak autor
-      const tasks = await Task.find({ _id_autora: author._id }).sort({ createdAt: -1 });
+        const tasks = await Task.find({ _id_autora: author._id, isPaid: { $ne: true } }).sort({ createdAt: -1 });
 
-      res.status(200).json(tasks);
+
+        res.status(200).json(tasks);
     }else if(mode==="submit_creator"){
       //submit taska przez jednego z użytkowników w tym przypadku tego który wysyła link do gita
       //płatność creator -> CodeMeMaybe
