@@ -31,9 +31,13 @@ const MyTask = ({ task: task }) => {
       <p className="text-gray-600"><strong>Cost: </strong>{task.koszt}</p>
       <p className="text-gray-600">{task.data}</p>
       <p className="text-gray-600">Languages: {task.languages.join(', ')}</p>
+      <p className="text-gray-600">Code Link: {task.code_link}</p>
       <button onClick={handleTask} className="mt-2 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
         Submit
       </button>
+      <span className="ml-3 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
+        <PayButton cartItems={task}></PayButton>
+      </span>
     </div>
   )
 };

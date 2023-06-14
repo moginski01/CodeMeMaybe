@@ -1,7 +1,5 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import PayButton from "../PayButton";
-
 
 const submitTask = async (taskID, message) => {
 
@@ -65,9 +63,6 @@ const MyTaskToComplete = ({ task: task }) => {
           Submit Task
         </button>
       </div>
-      <span className="ml-3 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
-        <PayButton cartItems={task}></PayButton>
-      </span>
     </div>
   );
 };
