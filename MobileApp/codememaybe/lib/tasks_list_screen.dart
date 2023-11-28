@@ -81,11 +81,11 @@ class _TaskScreenState extends State<TaskScreen> {
           final response = await http.patch(
             Uri.parse('http://10.0.2.2:4000/api/tasks'),
             headers: {
-              'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NDI5OGZkMmExYTc3YzU4ZTUxYThjMjYiLCJpYXQiOjE3MDExMDYxNjksImV4cCI6MTcwMTM2NTM2OX0.BHn3EK1-oLVTJhqkQXwx-l5jvfCitNc6uhyirGKJFwA',
+              'Authorization': 'Bearer $userToken',
               'Content-Type': 'application/json',
             },
             body: jsonEncode({
-              'email': 'test@gmail.com',
+              'email': 'userMail',
               'taskID': task['_id'], // Przekazanie ID zadania
             }),
           );
