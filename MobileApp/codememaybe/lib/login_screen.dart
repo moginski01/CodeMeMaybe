@@ -1,3 +1,4 @@
+import 'package:codememaybe/home_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert' as convert;
@@ -33,7 +34,7 @@ class LoginScreen extends StatelessWidget {
 
         var keyBox = await Hive.openBox(boxName);
         var data = convert.jsonDecode(response.body);
-        var token = data['token'];
+        var token = data;
         keyBox.put(key, token);
         onSuccess();
       } else {
@@ -106,6 +107,12 @@ class LoginScreen extends StatelessWidget {
                         login(emailController.text, passwordController.text,
                             () {
                           // Try add navigation;
+                           
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => MyHomePage()),
+                );
+              
                         }, () {
                           AwesomeDialog(
                             context: context,
