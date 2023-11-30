@@ -1,59 +1,45 @@
-import 'package:bottom_navy_bar/bottom_navy_bar.dart';
 import 'package:flutter/material.dart';
 
-void main() {
-  runApp(MyPage());
+class Nav extends StatefulWidget {
+  @override
+  _NavState createState() => _NavState();
 }
 
-class MyPage extends StatefulWidget {
-  @override
-  State<MyPage> createState() => _MyPageState();
-}
-
-class _MyPageState extends State<MyPage> {
-  int currentIndex = 0;
-  late PageController _pageController;
-
-  @override
-  void initState() {
-    super.initState();
-    _pageController = PageController();
-  }
-
-  @override
-  void dispose() {
-    _pageController.dispose();
-    super.dispose();
-  }
-
+class _NavState extends State<Nav> {
+  int _selectedIndex = 0;
+  List<Widget> widgetList = const [
+    TaskScreen(),
+    ,
+    ,
+  ];
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-        home: Scaffold(
-      appBar: AppBar(title: Text("Hello")),
-      body: SizedBox.expand(
-        child: PageView(
-          controller: _pageController,
-          onPageChanged: (index) {
-            setState(() {
-              currentIndex = index;
-            });
-          },
-        ),
+    return Scaffold(
+      body: Center(
+        child: widgetList[_selectedIndex],
+      )
+      bottomNavigationBar: BottomNavigationBar(
+        onTap: (index) {
+          setState(() {
+            _selectedIndex = index;
+          });
+        },
+        currentIndex: _selectedIndex,
+        items: const <BottomNavigationBarItem>[
+          BottomNavigationBarItem(
+            icon: Icon(Icons.home), 
+            label: 'Home',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.message),
+            label: 'Home',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.person),
+            label: 'Home',
+          ),
+        ],
       ),
-      bottomNavigationBar: BottomNavyBar(
-          onItemSelected: (index) {
-            setState(() {
-              _pageController.jumpToPage(index);
-            });
-          },
-          items: <BottomNavyBarItem>[
-            BottomNavyBarItem(title: Text('R1'), icon: Icon(Icons.home)),
-            BottomNavyBarItem(
-                title: Text('R2'),
-                icon: Icon(Icons.screen_search_desktop_rounded)),
-            BottomNavyBarItem(title: Text('R3'), icon: Icon(Icons.person_3)),
-          ]),
-    ));
+    );
   }
 }
