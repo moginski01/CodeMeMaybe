@@ -4,6 +4,7 @@ import 'dart:convert' as convert;
 import 'package:hive/hive.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:awesome_dialog/awesome_dialog.dart';
+import 'package:codememaybe/application_screen.dart';
 
 class RegisterScreen extends StatelessWidget {
   Future<void> register(
@@ -107,6 +108,11 @@ class RegisterScreen extends StatelessWidget {
                         register(emailController.text, passwordController.text,
                             () {
                           // Try add navigation;
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => ApplicationPage()),
+                          );
                         }, (errorMessage) {
                           AwesomeDialog(
                             context: context,
