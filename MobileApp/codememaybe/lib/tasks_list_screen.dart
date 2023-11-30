@@ -4,7 +4,11 @@ import 'dart:convert';
 import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:hive/hive.dart';
-import 'dart:convert' as convert;
+import 'package:intl/intl.dart';
+import "package:dev_icons/dev_icons.dart";
+import "package:codememaybe/devIconHelper.dart";
+import 'package:fluttertoast/fluttertoast.dart';
+import 'dart:convert';
 
 class TaskScreen extends StatefulWidget {
   @override
@@ -15,10 +19,22 @@ class _TaskScreenState extends State<TaskScreen> {
   List<dynamic> tasks = [];
   String userToken = "";
   String userMail = "";
+  FToast fToast = FToast();
+
+  String _formatDate(String dateString) {
+    final dateTime = DateTime.parse(dateString);
+    final format = DateFormat('dd.MM.yyyy HH:mm');
+    return format.format(dateTime);
+  }
+
+  IconData? getIcon(String technologyName) {
+    return DevIconHelper.icons[technologyName];
+  }
 
   @override
   void initState() {
     super.initState();
+    fToast.init(context);
     fetchData();
   }
 
@@ -68,8 +84,8 @@ class _TaskScreenState extends State<TaskScreen> {
       title: 'Szczegóły zadania',
       desc: '''
         Content: ${task['content']}
-        Koszt: ${task['koszt']}
-        Data: ${task['data']}
+        Koszt: '${task['koszt']} PLN'
+        Data: ${_formatDate(task['data'])}
         Języki: ${task['languages'].join(', ')}
         ''',
       btnCancelOnPress: () {},
@@ -99,7 +115,7 @@ class _TaskScreenState extends State<TaskScreen> {
           print('Wystąpił błąd: $error');
         }
       },
-    )..show();
+    ).show();
   }
 
   @override
@@ -110,13 +126,13 @@ class _TaskScreenState extends State<TaskScreen> {
       ),
       body: Center(
         child: tasks.isEmpty
-            ? CircularProgressIndicator()
+            ? const CircularProgressIndicator()
             : ListView.builder(
                 itemCount: tasks.length,
                 itemBuilder: (context, index) {
                   return Card(
                     elevation: 3,
-                    margin: EdgeInsets.all(8),
+                    margin: const EdgeInsets.all(8),
                     child: ListTile(
                       onTap: () {
                         _showTaskDetailsDialog(tasks[index]);
@@ -125,10 +141,36 @@ class _TaskScreenState extends State<TaskScreen> {
                       subtitle: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: <Widget>[
-                          Text('Koszt: ${tasks[index]['koszt']}'),
-                          Text('Data: ${tasks[index]['data']}'),
-                          Text(
-                              'Języki: ${tasks[index]['languages'].join(', ')}'),
+                          const SizedBox(height: 10),
+                          Text('Koszt: ${tasks[index]['koszt']} PLN'),
+                          const SizedBox(height: 5),
+                          Text('Data: ${_formatDate(tasks[index]['data'])}'),
+                          const SizedBox(height: 10),
+                          SingleChildScrollView(
+                            scrollDirection: Axis.horizontal,
+                            child: Row(
+                              children: tasks[index]['languages']
+                                  .map<Widget>((language) {
+                                return Padding(
+                                    padding: const EdgeInsets.symmetric(
+                                        horizontal: 15.0),
+                                    child: InkWell(
+                                      onTap: () {
+                                        Fluttertoast.showToast(
+                                            msg: "Language: $language",
+                                            toastLength: Toast.LENGTH_SHORT,
+                                            gravity: ToastGravity.CENTER,
+                                            timeInSecForIosWeb: 1,
+                                            fontSize: 43.0);
+                                      },
+                                      child: Icon(
+                                        getIcon(language),
+                                        size: 30,
+                                      ),
+                                    ));
+                              }).toList(),
+                            ),
+                          )
                         ],
                       ),
                     ),

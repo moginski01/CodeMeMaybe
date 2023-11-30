@@ -39,10 +39,15 @@ dependencies:
   flutter_dotenv: ^5.1.0
   path_provider: ^2.1.1
   awesome_dialog: ^3.1.0
+  google_fonts: ^6.1.0
+  intl: ^0.18.1
+  dev_icons: ^1.0.0
+  fluttertoast: ^8.2.4
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
+  # flutter_launcher_icons: ^0.13.1
 
   # The "flutter_lints" package below contains a set of recommended lints to
   # encourage good coding practices. The lint set provided by the package is
@@ -54,11 +59,18 @@ dev_dependencies:
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
 
+# flutter_icons:
+#   android: true
+#   ios: true
+#   image_path: "images/logo_codememaybe.png"
+
 # The following section is specific to Flutter packages.
 flutter:
   assets:
     - images/login_background.jpg
+    - images/logo.png
     - .env
+    - "images/logo_codememaybe.png"
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in
   # the material Icons class.
@@ -80,6 +92,7 @@ flutter:
   # "family" key with the font family name, and a "fonts" key with a
   # list giving the asset and other descriptors for the font. For
   # example:
+
   # fonts:
   #   - family: Schyler
   #     fonts:
