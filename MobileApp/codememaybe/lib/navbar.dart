@@ -1,3 +1,6 @@
+import 'package:codememaybe/add_task_screen.dart';
+import 'package:codememaybe/my_tasks_screen.dart';
+import 'package:codememaybe/tasks_list_screen.dart';
 import 'package:flutter/material.dart';
 
 class Nav extends StatefulWidget {
@@ -7,17 +10,17 @@ class Nav extends StatefulWidget {
 
 class _NavState extends State<Nav> {
   int _selectedIndex = 0;
-  List<Widget> widgetList = const [
+  List<Widget> widgetList = [
     TaskScreen(),
-    ,
-    ,
+    AddTaskScreen(),
+    MyTaksScreen(),
   ];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Center(
         child: widgetList[_selectedIndex],
-      )
+      ),
       bottomNavigationBar: BottomNavigationBar(
         onTap: (index) {
           setState(() {
@@ -27,16 +30,16 @@ class _NavState extends State<Nav> {
         currentIndex: _selectedIndex,
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
-            icon: Icon(Icons.home), 
-            label: 'Home',
+            icon: Icon(Icons.home),
+            label: 'Lista zgłoszeń',
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.message),
-            label: 'Home',
+            label: 'Dodaj zgłoszenie',
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.person),
-            label: 'Home',
+            label: 'Moje zgłoszenia',
           ),
         ],
       ),
