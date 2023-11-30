@@ -5,7 +5,6 @@ import 'dart:convert';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:hive/hive.dart';
 
-
 class AddTaskScreen extends StatefulWidget {
   @override
   _AddTaskScreenState createState() => _AddTaskScreenState();
@@ -26,17 +25,17 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
     super.dispose();
   }
 
-  Future<void> _sendPostRequest(String content, int cost, List<String> languages) async {
-    const apiUrl = 'http://10.0.2.2:4000/api/tasks/new_task'; // Zastąp to adresem URL twojego endpointu API
+  Future<void> _sendPostRequest(
+      String content, int cost, List<String> languages) async {
     var boxName = dotenv.get('BOX_NAME').toString();
     var key = dotenv.get('BOX_JWT_KEY').toString();
-
+    var url =
+        Uri.https(dotenv.get('BACKEND_API').toString(), 'api/tasks/new_task');
     var keyBox = await Hive.openBox(boxName);
     // var data = convert.jsonDecode(response.body);
     var userInfo = keyBox.get(key);
     userToken = userInfo['token'];
     userMail = userInfo['email'];
-
 
     final newTaskData = {
       'content': content,
@@ -47,7 +46,7 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
 
     try {
       final response = await http.post(
-        Uri.parse(apiUrl),
+        url,
         headers: {
           'Authorization': 'Bearer $userToken',
           'Content-Type': 'application/json',
@@ -112,14 +111,18 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
                 String taskText = taskController.text;
                 int costText = int.tryParse(costController.text) ?? 0;
                 String languageText = languageController.text;
-                List<String> languagesList = languageText.split(',').map((language) => language.trim()).toList();
+                List<String> languagesList = languageText
+                    .split(',')
+                    .map((language) => language.trim())
+                    .toList();
 
                 AwesomeDialog(
                   context: context,
                   dialogType: DialogType.info,
                   animType: AnimType.rightSlide,
                   title: 'Task details',
-                  desc: 'Zadanie: $taskText\nKoszt: $costText\nJęzyki: $languageText',
+                  desc:
+                      'Zadanie: $taskText\nKoszt: $costText\nJęzyki: $languageText',
                   btnCancelOnPress: () {},
                   btnOkOnPress: () async {
                     await _sendPostRequest(taskText, costText, languagesList);
