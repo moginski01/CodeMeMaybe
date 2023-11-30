@@ -6,7 +6,6 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:hive/hive.dart';
 import 'dart:convert' as convert;
 
-
 class TaskScreen extends StatefulWidget {
   @override
   _TaskScreenState createState() => _TaskScreenState();
@@ -16,20 +15,18 @@ class _TaskScreenState extends State<TaskScreen> {
   List<dynamic> tasks = [];
   String userToken = "";
   String userMail = "";
-  
-  
+
   @override
   void initState() {
     super.initState();
     fetchData();
   }
 
-
   Future<void> fetchData() async {
     try {
       var boxName = dotenv.get('BOX_NAME').toString();
       var key = dotenv.get('BOX_JWT_KEY').toString();
-
+      var url = Uri.https(dotenv.get('BACKEND_API').toString(), 'api/tasks');
       var keyBox = await Hive.openBox(boxName);
       // var data = convert.jsonDecode(response.body);
       var userInfo = keyBox.get(key);
@@ -39,10 +36,9 @@ class _TaskScreenState extends State<TaskScreen> {
       debugPrint("userToken and mail:");
       debugPrint(userToken);
       debugPrint(userMail);
-      
 
       final response = await http.post(
-        Uri.parse('http://10.0.2.2:4000/api/tasks'),
+        url,
         headers: {
           'Authorization': 'Bearer $userToken',
           'Content-Type': 'application/json',
@@ -56,7 +52,8 @@ class _TaskScreenState extends State<TaskScreen> {
         });
         print(tasks);
       } else {
-        print('Wystąpił problem podczas pobierania danych: ${response.statusCode}');
+        print(
+            'Wystąpił problem podczas pobierania danych: ${response.statusCode}');
       }
     } catch (error) {
       print('Wystąpił błąd: $error');
@@ -95,7 +92,8 @@ class _TaskScreenState extends State<TaskScreen> {
             // Navigator.pop(context); // Zamknięcie AwesomeDialog
             print('Pomyślnie zaktualizowano zadanie.');
           } else {
-            print('Wystąpił problem podczas aktualizacji zadania: ${response.statusCode}');
+            print(
+                'Wystąpił problem podczas aktualizacji zadania: ${response.statusCode}');
           }
         } catch (error) {
           print('Wystąpił błąd: $error');
@@ -129,7 +127,8 @@ class _TaskScreenState extends State<TaskScreen> {
                         children: <Widget>[
                           Text('Koszt: ${tasks[index]['koszt']}'),
                           Text('Data: ${tasks[index]['data']}'),
-                          Text('Języki: ${tasks[index]['languages'].join(', ')}'),
+                          Text(
+                              'Języki: ${tasks[index]['languages'].join(', ')}'),
                         ],
                       ),
                     ),

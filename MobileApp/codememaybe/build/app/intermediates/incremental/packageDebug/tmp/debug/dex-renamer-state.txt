@@ -1,4 +1,4 @@
-#Thu Nov 30 03:32:53 CET 2023
+#Thu Nov 30 17:27:02 CET 2023
 base.0=C\:\\Users\\Quick\\OneDrive\\Pulpit\\test12\\MeBiznes\\CodeMeMaybe\\MobileApp\\codememaybe\\build\\app\\intermediates\\dex\\debug\\mergeDexDebug\\classes.dex
 path.0=classes.dex
 renamed.0=classes.dex
