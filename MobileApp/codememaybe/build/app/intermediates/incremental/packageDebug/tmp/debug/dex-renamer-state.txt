@@ -1,4 +1,16 @@
-#Tue Nov 28 19:15:55 CET 2023
-base.0=D\:\\Politechnika\\Ebiznes\\m-commerce\\CodeMeMaybe\\MobileApp\\codememaybe\\build\\app\\intermediates\\dex\\debug\\mergeDexDebug\\classes.dex
+#Thu Nov 30 22:26:53 CET 2023
+base.0=E\:\\Programming\\CodeMeMaybe\\MobileApp\\codememaybe\\build\\app\\intermediates\\dex\\debug\\mergeExtDexDebug\\classes.dex
+base.1=E\:\\Programming\\CodeMeMaybe\\MobileApp\\codememaybe\\build\\app\\intermediates\\dex\\debug\\mergeLibDexDebug\\0\\classes.dex
+base.2=E\:\\Programming\\CodeMeMaybe\\MobileApp\\codememaybe\\build\\app\\intermediates\\dex\\debug\\mergeProjectDexDebug\\0\\classes.dex
+base.3=E\:\\Programming\\CodeMeMaybe\\MobileApp\\codememaybe\\build\\app\\intermediates\\dex\\debug\\mergeProjectDexDebug\\14\\classes.dex
+base.4=E\:\\Programming\\CodeMeMaybe\\MobileApp\\codememaybe\\build\\app\\intermediates\\dex\\debug\\mergeProjectDexDebug\\1\\classes.dex
 path.0=classes.dex
+path.1=0/classes.dex
+path.2=0/classes.dex
+path.3=14/classes.dex
+path.4=1/classes.dex
 renamed.0=classes.dex
+renamed.1=classes2.dex
+renamed.2=classes3.dex
+renamed.3=classes4.dex
+renamed.4=classes5.dex

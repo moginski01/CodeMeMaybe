@@ -72,39 +72,40 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Dodaj zadanie'),
+        title: const Text('Dodaj zadanie'),
       ),
-      body: Padding(
-        padding: EdgeInsets.all(16.0),
+      body: SingleChildScrollView(
+        padding: const EdgeInsets.all(16.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
             TextFormField(
               controller: taskController,
               maxLines: 10,
-              decoration: InputDecoration(
+              decoration: const InputDecoration(
                 labelText: 'Treść zadania',
                 border: OutlineInputBorder(),
               ),
             ),
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
             TextFormField(
               controller: costController,
-              keyboardType: TextInputType.numberWithOptions(decimal: true),
-              decoration: InputDecoration(
+              keyboardType:
+                  const TextInputType.numberWithOptions(decimal: true),
+              decoration: const InputDecoration(
                 labelText: 'Koszt',
                 border: OutlineInputBorder(),
               ),
             ),
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
             TextFormField(
               controller: languageController,
-              decoration: InputDecoration(
+              decoration: const InputDecoration(
                 labelText: 'Języki',
                 border: OutlineInputBorder(),
               ),
             ),
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
             ElevatedButton(
               onPressed: () {
                 // Wyświetlenie AwesomeDialog po kliknięciu przycisku "Dodaj"
@@ -127,9 +128,9 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
                   btnOkOnPress: () async {
                     await _sendPostRequest(taskText, costText, languagesList);
                   },
-                )..show();
+                ).show();
               },
-              child: Text('Dodaj'),
+              child: const Text('Dodaj'),
             ),
           ],
         ),
