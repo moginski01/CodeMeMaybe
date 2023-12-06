@@ -43,6 +43,7 @@ dependencies:
   intl: ^0.18.1
   dev_icons: ^1.0.0
   fluttertoast: ^8.2.4
+  flutter_stripe: ^7.0.0
 
 dev_dependencies:
   flutter_test:
