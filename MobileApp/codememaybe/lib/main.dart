@@ -7,7 +7,10 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_stripe/flutter_stripe.dart';
 
 void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+
   await dotenv.load(fileName: ".env");
+  Stripe.publishableKey = dotenv.get('STRIPE_PUBLISHABLE_KEY').toString();
   var directory = await getApplicationDocumentsDirectory();
   Hive.init(directory.path);
 
@@ -62,4 +65,3 @@ class MyApp extends StatelessWidget {
 //     );
 //   }
 // }
-
