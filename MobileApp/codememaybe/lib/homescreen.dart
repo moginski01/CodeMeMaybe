@@ -6,11 +6,16 @@ import 'package:flutter_stripe/flutter_stripe.dart';
 import 'package:http/http.dart' as http;
 
 var paymentValue = 0;
-
+var taskID = "";
+var email= "";
+var token = "";
 class HomeScreen extends StatefulWidget {
   // int paymentValue = 0;
-  HomeScreen(int test, {super.key}){
+  HomeScreen(int test,String taskID, String email, String token, {super.key}){
     paymentValue = test*100;//100 po to bo jako grosze taktuje
+    taskID = taskID;
+    email = email;
+    token = token;
     debugPrint("test112121");
     debugPrint(paymentValue.toString());
     // debugPrint(paymentValue as String?);
@@ -87,8 +92,39 @@ class _HomeScreenState extends State<HomeScreen> {
 
   displayPaymentSheet() async {
     try {
-      await Stripe.instance.presentPaymentSheet().then((value) {
+      await Stripe.instance.presentPaymentSheet().then((value) async {//przez dodanie asynca może sie wyjebac
+
         print("Payment Successfully");
+        Map<String, dynamic> requestData = {
+        'email': email,
+        'taskID': taskID,
+      };
+      
+      // Nagłówek z tokenem Bearer
+      Map<String, String> headers = {
+        'Authorization': 'Bearer $token',
+        'Content-Type': 'application/json', // Określenie typu zawartości
+      };
+      
+      // Adres URI do zapytania POST
+      String backendAPI = Uri.https(dotenv.get('BACKEND_API').toString(), 'api/tasks/updatePaymentStatus').toString();
+
+      // Wykonanie żądania POST
+      var response = await http.post(
+        Uri.parse(backendAPI),
+        headers: headers,
+        body: jsonEncode(requestData), // Dane przekazane jako ciało żądania
+      );
+
+      // Sprawdzenie odpowiedzi
+      if (response.statusCode == 200) {
+        print('Request Successful: ${response.body}');
+        // Obsługa odpowiedzi z serwera tutaj
+      } else {
+        print('Request Failed: ${response.statusCode}');
+        // Obsługa błędu związana z żądaniem
+      }
+    
       });
     } catch (e) {
       print('$e');

@@ -28,7 +28,7 @@ class _MyTaskScreenState extends State<MyTaskScreen> {
     try {
       var boxName = dotenv.get('BOX_NAME').toString();
       var key = dotenv.get('BOX_JWT_KEY').toString();
-      var mode = "toBeCompleted";
+      var mode = "delegated";
       var url = Uri.https(
           dotenv.get('BACKEND_API').toString(), '/api/tasks/my_tasks');
       var keyBox = await Hive.openBox(boxName);
@@ -128,7 +128,8 @@ class _MyTaskScreenState extends State<MyTaskScreen> {
                           
                           Navigator.push(
                             context,
-                            MaterialPageRoute(builder: (context) => HomeScreen(tasks[index]['koszt'])),
+                            // String taskID, String email, String token
+                            MaterialPageRoute(builder: (context) => HomeScreen(tasks[index]['koszt'],tasks[index]['id'],userMail,userToken)),
                           );
                           // Pusta funkcja wykonująca się po naciśnięciu przycisku
                         },
