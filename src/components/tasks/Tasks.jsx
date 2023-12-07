@@ -30,7 +30,7 @@ const Tasks = () => {
     }, [])
   
     return (
-      <div className="bg-gray-100 p-4 ml-8 rounded-lg shadow-md my-4 w-3/12">
+      <div className="bg-gray-100 p-4 ml-8 rounded-lg shadow-md my-4 w-7/12">
         <div className="">
           {tasks && tasks.map(task => (
             <TaskDetails task={task} key={task._id} />

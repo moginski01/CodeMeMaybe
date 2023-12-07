@@ -24,8 +24,8 @@ const TaskDetails = ({ task }) => {
   };
 
   return (
-    <div className="mx-auto bg-white rounded-lg my-2 px-5 py-3 relative shadow-sm max-w-lg">
-      <h4 className="mb-2 text-lg text-primary-500">{task.content}</h4>
+    // <div className="mx-auto bg-white rounded-lg my-2 px-5 py-3 relative shadow-sm max-w-lg">
+    <div className="mx-auto bg-white rounded-lg my-2 px-5 py-3 relative shadow-sm max-w-screen">      <h4 className="mb-2 text-lg text-primary-500">{task.content}</h4>
       <p className="text-sm text-gray-700"><strong>Cost: </strong>{task.koszt}</p>
       <p className="text-sm text-gray-700">{task.data}</p>
       <p className="text-sm text-gray-700">Languages: {task.languages.join(', ')}</p>

@@ -4,7 +4,8 @@ const {
     getMyTasks,
     asignTask,
     addTask,
-    updateMyTasks
+    updateMyTasks,
+    updatePaymentStatus
 } = require('../controllers/tasksController')
 
 const requireAuth = require('../middleware/requireAuth')
@@ -19,6 +20,7 @@ router.use(requireAuth)
 router.post('/', getTasks)
 router.patch('/', asignTask)
 
+router.post('/updatePaymentStatus',updatePaymentStatus)
 router.post('/new_task', addTask)
 router.post('/my_tasks', getMyTasks)
 router.patch('/my_tasks', updateMyTasks)

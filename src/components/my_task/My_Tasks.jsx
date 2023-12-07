@@ -57,7 +57,7 @@ const MyTasks = () => {
       <h2 className="text-2xl font-bold mb-4 ml-4 text-white">
         Delegated tasks
       </h2>
-      <div className="tasks bg-gray-100 p-4 ml-8 rounded-lg shadow-md my-4 w-3/12">
+      <div className="tasks bg-gray-100 p-4 ml-8 rounded-lg shadow-md my-4 w-7/12">
         <div className="home">
           <div className="tasks">
             {tasks && tasks.map(task => (
@@ -69,7 +69,7 @@ const MyTasks = () => {
       <h2 className="text-2xl font-bold mb-4 ml-4 text-white">
         Tasks to be completed
       </h2>
-      <div className="tasks bg-gray-100 p-4 ml-8 rounded-lg shadow-md my-4 w-3/12">
+      <div className="tasks bg-gray-100 p-4 ml-8 rounded-lg shadow-md my-4 w-7/12">
         <div className="home">
           <div className="tasks">
             {tasksToBeCompleted && tasksToBeCompleted.map(task => (
