@@ -2,7 +2,7 @@ import 'package:codememaybe/add_task_screen.dart';
 import 'package:codememaybe/my_tasks_screen.dart';
 import 'package:codememaybe/tasks_list_screen.dart';
 import 'package:flutter/material.dart';
-
+import 'my_tasks_screen.dart';
 class Nav extends StatefulWidget {
   @override
   _NavState createState() => _NavState();
@@ -13,7 +13,7 @@ class _NavState extends State<Nav> {
   List<Widget> widgetList = [
     TaskScreen(),
     AddTaskScreen(),
-    MyTaksScreen(),
+    MyTaskScreen(),
   ];
   @override
   Widget build(BuildContext context) {

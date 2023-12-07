@@ -4,6 +4,8 @@ import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:hive/hive.dart';
+import 'homescreen.dart';
+
 
 class AddTaskScreen extends StatefulWidget {
   @override
@@ -124,7 +126,9 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
                   title: 'Task details',
                   desc:
                       'Zadanie: $taskText\nKoszt: $costText\nJęzyki: $languageText',
-                  btnCancelOnPress: () {},
+                  btnCancelOnPress: () {
+                      
+                  },
                   btnOkOnPress: () async {
                     await _sendPostRequest(taskText, costText, languagesList);
                   },

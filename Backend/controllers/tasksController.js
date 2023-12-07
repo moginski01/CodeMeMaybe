@@ -56,6 +56,25 @@ const getTasks = async (req, res) => {
   res.status(200).json(tasks);
 };
 
+
+const updatePaymentStatus = async (req, res) => {
+  const { email,taskID } = req.body;
+
+  const author = await User.findOne({ email: email });
+
+  if (!author) {
+    return res.status(404).send("Author not found");
+  }
+
+  const updatedTask = await Task.findOneAndUpdate(
+      { _id: taskID }, // Warunek wyszukiwania po polu _id
+      { isPaid: true }, // Aktualizacja pola isPaid na true
+      { new: true } // Opcjonalnie, aby zwrócić zaktualizowany dokument
+  );
+
+  return res.status(200).send();
+}
+
 const updateMyTasks = async (req, res) => {
   const { email,taskID } = req.body;
 
@@ -160,5 +179,6 @@ module.exports = {
     getTasks,
     asignTask,
     getMyTasks,
-    updateMyTasks
+    updateMyTasks,
+    updatePaymentStatus
 }
