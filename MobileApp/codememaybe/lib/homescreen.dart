@@ -11,13 +11,16 @@ var email= "";
 var token = "";
 class HomeScreen extends StatefulWidget {
   // int paymentValue = 0;
-  HomeScreen(int test,String taskID, String email, String token, {super.key}){
-    paymentValue = test*100;//100 po to bo jako grosze taktuje
-    taskID = taskID;
-    email = email;
-    token = token;
+  HomeScreen(int paymentVal,String taskID_local, String email_local, String token_local, {super.key}){
+    paymentValue = paymentVal*100;//100 po to bo jako grosze taktuje
+    taskID = taskID_local;
+    email = email_local;
+    token = token_local;
     debugPrint("test112121");
     debugPrint(paymentValue.toString());
+    debugPrint(taskID);
+    debugPrint(email);
+    debugPrint(token);
     // debugPrint(paymentValue as String?);
 
   }
@@ -110,6 +113,10 @@ class _HomeScreenState extends State<HomeScreen> {
       String backendAPI = Uri.https(dotenv.get('BACKEND_API').toString(), 'api/tasks/updatePaymentStatus').toString();
 
       // Wykonanie żądania POST
+      debugPrint('post data:');
+      debugPrint(jsonEncode(requestData));
+      debugPrint(backendAPI);
+      debugPrint(token);
       var response = await http.post(
         Uri.parse(backendAPI),
         headers: headers,

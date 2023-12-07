@@ -129,7 +129,7 @@ class _MyTaskScreenState extends State<MyTaskScreen> {
                           Navigator.push(
                             context,
                             // String taskID, String email, String token
-                            MaterialPageRoute(builder: (context) => HomeScreen(tasks[index]['koszt'],tasks[index]['id'],userMail,userToken)),
+                            MaterialPageRoute(builder: (context) => HomeScreen(tasks[index]['koszt'],tasks[index]['_id'],userMail,userToken)),
                           );
                           // Pusta funkcja wykonująca się po naciśnięciu przycisku
                         },
