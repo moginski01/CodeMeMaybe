@@ -69,10 +69,10 @@ class _HomeScreenState extends State<HomeScreen> {
   Future<void> makePayment(int value) async {
     var val = value;
     try {
-      paymentIntent = await createPaymentIntent('1111', 'GBP');
+      paymentIntent = await createPaymentIntent('1111', 'PLN');
 
-      var gpay = PaymentSheetGooglePay(merchantCountryCode: "GB",
-          currencyCode: "GBP",
+      var gpay = PaymentSheetGooglePay(merchantCountryCode: "PL",
+          currencyCode: "PLN",
           testEnv: true);
 
       //STEP 2: Initialize Payment Sheet

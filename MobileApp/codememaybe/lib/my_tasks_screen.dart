@@ -6,6 +6,8 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:hive/hive.dart';
 import 'package:codememaybe/homescreen.dart';
+import "package:codememaybe/devIconHelper.dart";
+import 'package:intl/intl.dart';
 
 class MyTaskScreen extends StatefulWidget {
   @override
@@ -64,6 +66,16 @@ class _MyTaskScreenState extends State<MyTaskScreen> {
     }
   }
 
+  IconData? getIcon(String technologyName) {
+    return DevIconHelper.icons[technologyName];
+  }
+
+ String _formatDate(String dateString) {
+    final dateTime = DateTime.parse(dateString);
+    final format = DateFormat('dd.MM.yyyy HH:mm');
+    return "Data: ${format.format(dateTime)}";
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -93,7 +105,7 @@ class _MyTaskScreenState extends State<MyTaskScreen> {
                           const SizedBox(height: 10),
                           Text('Koszt: ${tasks[index]['koszt']} PLN'),
                           const SizedBox(height: 5),
-                          Text('Data: ${tasks[index]['data']}'),
+                          Text(_formatDate(tasks[index]['data'])),
                           const SizedBox(height: 10),
                           SingleChildScrollView(
                             scrollDirection: Axis.horizontal,
@@ -114,7 +126,10 @@ class _MyTaskScreenState extends State<MyTaskScreen> {
                                         fontSize: 18.0,
                                       );
                                     },
-                                    child: Text(language.toString()),
+                                    child: Icon(
+                                        getIcon(language),
+                                        size: 30,
+                                      ),
                                   ),
                                 );
                               }).toList(),
